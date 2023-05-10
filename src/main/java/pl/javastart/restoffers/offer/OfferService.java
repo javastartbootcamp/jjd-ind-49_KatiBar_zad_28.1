@@ -72,7 +72,7 @@ public class OfferService {
         offer.setDescription(offerInsertDto.getDescription());
         offer.setImgUrl(offerInsertDto.getImgUrl());
         offer.setPrice(offerInsertDto.getPrice());
-        if (categoryRepository.getById(offerInsertDto.getCategoryId()) != null) {
+        if (offerInsertDto.getCategoryId() != null) {
             offer.setCategory(categoryRepository.getById(offerInsertDto.getCategoryId()));
         } else {
             offer.setCategory(categoryRepository.getById(1L));
