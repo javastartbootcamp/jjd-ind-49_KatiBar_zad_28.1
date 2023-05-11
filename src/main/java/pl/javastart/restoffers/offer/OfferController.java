@@ -33,7 +33,7 @@ public class OfferController {
 
     @GetMapping("/count")
     public int countOffers() {
-        return offerService.findAllOffers().size();
+        return offerService.countElements();
     }
 
     @PostMapping

@@ -21,25 +21,17 @@ public class OfferService {
     public List<OfferDto> findFiltered(Long categoryId, String title) {
         List<Offer> offers;
         if (categoryId == null) {
-            if (title == null) {
-                offers = offerRepository.findAll();
-            } else {
-                offers = offerRepository.findAll()
-                        .stream()
-                        .filter(offer -> offer.getTitle().toLowerCase()
-                                .contains(title.toLowerCase()))
-                        .collect(Collectors.toList());
-            }
+            offers = offerRepository.findAll();
         } else {
-            if (title == null) {
-                offers = offerRepository.findByCategoryId(categoryId);
-            } else {
-                offers = offerRepository.findByCategoryId(categoryId)
+            offers = offerRepository.findByCategoryId(categoryId);
+        }
+
+        if (title != null) {
+                offers = offers
                         .stream()
                         .filter(offer -> offer.getTitle().toLowerCase()
                                 .contains(title.toLowerCase()))
                         .collect(Collectors.toList());
-            }
         }
         return offers
                 .stream()
@@ -48,6 +40,9 @@ public class OfferService {
     }
 
 
+    public int countElements() {
+        return offerRepository.countOffersByIdIsNotNull();
+    }
 
     public Optional<OfferDto> findById(Long id) {
         return offerRepository.findById(id).map(this::convertToDto);
@@ -72,11 +67,7 @@ public class OfferService {
         offer.setDescription(offerInsertDto.getDescription());
         offer.setImgUrl(offerInsertDto.getImgUrl());
         offer.setPrice(offerInsertDto.getPrice());
-        if (offerInsertDto.getCategoryId() != null) {
-            offer.setCategory(categoryRepository.getById(offerInsertDto.getCategoryId()));
-        } else {
-            offer.setCategory(categoryRepository.getById(1L));
-        }
+        offer.setCategory(categoryRepository.findCategoryByName(offerInsertDto.getCategory()));
     }
 
     private OfferDto convertToDto(Offer offer) {
@@ -86,8 +77,7 @@ public class OfferService {
         offerDto.setDescription(offer.getDescription());
         offerDto.setImgUrl(offer.getImgUrl());
         offerDto.setPrice(offer.getPrice());
-        offerDto.setCategoryName(offer.getCategory().getName());
-        offerDto.setCategoryDescription(offer.getCategory().getDescription());
+        offerDto.setCategory(offer.getCategory().getName());
         return offerDto;
     }
 

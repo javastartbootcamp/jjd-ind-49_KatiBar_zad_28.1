@@ -7,7 +7,7 @@ public class OfferInsertDto {
     private String imgUrl;
     private double price;
 
-    private Long categoryId;
+    private String category;
 
     public String getTitle() {
         return title;
@@ -41,11 +41,11 @@ public class OfferInsertDto {
         this.price = price;
     }
 
-    public Long getCategoryId() {
-        return categoryId;
+    public String getCategory() {
+        return category;
     }
 
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

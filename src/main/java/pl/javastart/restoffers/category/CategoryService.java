@@ -30,9 +30,9 @@ public class CategoryService {
 
     private CategoryDto convertToDto(Category category) {
         CategoryDto categoryDto = new CategoryDto();
-        categoryDto.setId(category.getId());
         categoryDto.setName(category.getName());
         categoryDto.setDescription(category.getDescription());
+        categoryDto.setOffers(categoryRepository.countCategoriesByName(category.getName()));
         return categoryDto;
     }
 

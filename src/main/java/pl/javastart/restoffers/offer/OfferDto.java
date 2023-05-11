@@ -1,5 +1,7 @@
 package pl.javastart.restoffers.offer;
 
+import pl.javastart.restoffers.category.Category;
+
 public class OfferDto {
     private Long id;
     private String title;
@@ -7,8 +9,7 @@ public class OfferDto {
     private String imgUrl;
     private double price;
 
-    private String categoryName;
-    private String categoryDescription;
+    private String category;
 
     public Long getId() {
         return id;
@@ -50,19 +51,11 @@ public class OfferDto {
         this.price = price;
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    public String getCategory() {
+        return category;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public String getCategoryDescription() {
-        return categoryDescription;
-    }
-
-    public void setCategoryDescription(String categoryDescription) {
-        this.categoryDescription = categoryDescription;
+    public void setCategory(String category) {
+        this.category = category;
     }
 }
